@@ -387,15 +387,22 @@ function renderSaldos() {
 /* filtro */
 function renderFilter() {
   const opts = [['all', 'Todo o período']].concat(years.map(y => [y, y]));
-  $('chips').innerHTML = opts.map(([v, t]) => `<button type="button" class="chip" data-p="${v}" aria-pressed="${v === PERIOD}">${t}</button>`).join('');
+  const yearSel = isMonth() ? PERIOD.slice(2, 6) : PERIOD;          /* ano ativo (o do mês, quando há mês escolhido) */
+  $('chips').innerHTML = opts.map(([v, t]) => `<button type="button" class="chip" data-p="${v}" aria-pressed="${v === yearSel}">${t}</button>`).join('');
   $('chips').querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => setPeriod(b.dataset.p)));
   const sel = $('month-sel');
-  sel.innerHTML = '<option value="">Escolher…</option>' + D.months.slice().reverse().map(m => `<option value="m:${m.k}"${PERIOD === 'm:' + m.k ? ' selected' : ''}>${m.l}${m.sim ? ' (simulado)' : ''}</option>`).join('');
+  const opt = m => `<option value="m:${m.k}"${PERIOD === 'm:' + m.k ? ' selected' : ''}>${m.l}${m.sim ? ' (simulado)' : ''}</option>`;
+  if (yearSel === 'all') {
+    sel.innerHTML = '<option value="all">Escolher…</option>' + years.slice().reverse().map(y =>
+      `<optgroup label="${y}">${D.months.filter(m => m.k.startsWith(y)).reverse().map(opt).join('')}</optgroup>`).join('');
+  } else {
+    sel.innerHTML = `<option value="${yearSel}">Ano inteiro (${yearSel})</option>` + D.months.filter(m => m.k.startsWith(yearSel)).map(opt).join('');
+  }
   sel.classList.toggle('on', isMonth());
   const ms = monthsOf(PERIOD), sims = ms.filter(m => m.sim).map(m => m.l);
   $('period-info').innerHTML = (isMonth() ? ms[0].l : `${ms[0].l} a ${ms[ms.length - 1].l} · ${ms.length} meses`) + (sims.length ? ` <span class="sim-badge">simulado: ${sims.join(', ')}</span>` : '');
 }
-$('month-sel').addEventListener('change', e => setPeriod(e.target.value || 'all'));
+$('month-sel').addEventListener('change', e => setPeriod(e.target.value || 'all'));   /* "Ano inteiro" volta para o ano; "Escolher…" volta para todo o período */
 
 /* entrou / saiu / sobrou */
 function renderFlow() {
