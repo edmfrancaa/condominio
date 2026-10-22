@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<style>html,body{height:100%}body{margin:0}[hidden]{display:none!important}img{max-width:100%}</style>
+</head>
+<body>
+<title>Contas do Geraldo José Ribeiro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Urbanist:wght@300;500;700&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: livro de prestação de contas em tela — faixa de identificação, cartões de saldo, depois detalhe (apto, DRE, gráficos). */
+:root {
+  --bg: #f2f5f8; --surface: #fcfdfe; --surface-2: #e9eff5;
+  --ink: #14202c; --ink-2: #4a5866; --muted: #7b8894; --line: #dbe3ea; --axis: #c3ccd5;
+  --accent: #2a78d6; --accent-ink: #1c5cab; --accent-soft: #dbe9fa;
+  --s1: #2a78d6; --s2: #eb6834; --s3: #1baf7a;
+  --sim: #6250d6; --sim-soft: #ebe8fb;
+  --good: #006300; --crit: #b42f2f; --crit-soft: #fbe7e7; --warn-soft: #fdf1d8;
+  --f-display: "Urbanist", "Segoe UI", system-ui, sans-serif;
+  --f-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #0d1318; --surface: #141c23; --surface-2: #1b252e;
+  --ink: #edf1f4; --ink-2: #b6c1cb; --muted: #8492a0; --line: #26313b; --axis: #35424e;
+  --accent: #3987e5; --accent-ink: #86b6ef; --accent-soft: #17304d;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70;
+  --sim: #9085e9; --sim-soft: #242046;
+  --good: #3cc23c; --crit: #f07c7c; --crit-soft: #3a1c1c; --warn-soft: #3a3018;
+  color-scheme: dark; } }
+:root[data-theme="dark"] {
+  --bg: #0d1318; --surface: #141c23; --surface-2: #1b252e;
+  --ink: #edf1f4; --ink-2: #b6c1cb; --muted: #8492a0; --line: #26313b; --axis: #35424e;
+  --accent: #3987e5; --accent-ink: #86b6ef; --accent-soft: #17304d;
+  --s1: #3987e5; --s2: #d95926; --s3: #199e70;
+  --sim: #9085e9; --sim-soft: #242046;
+  --good: #3cc23c; --crit: #f07c7c; --crit-soft: #3a1c1c; --warn-soft: #3a3018;
+  color-scheme: dark; }
+
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-inline: 20px; padding-block: 0 48px; }
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; }
+h2 { font-size: 1.45rem; font-weight: 700; letter-spacing: -0.01em; }
+h3 { font-size: 1.05rem; font-weight: 700; }
+p { margin: 0; }
+.num { font-variant-numeric: tabular-nums; }
+.eyebrow { font-size: .72rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); font-weight: 600; }
+.lede { color: var(--ink-2); max-width: 68ch; }
+button, input { font: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Faixa de identificação */
+.band { background: var(--surface); border-bottom: 1px solid var(--line); }
+.band .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px; padding-block: 18px; }
+.brand { display: flex; align-items: center; gap: 14px; min-width: 0; }
+.brand-mark { width: 6px; align-self: stretch; background: var(--accent); border-radius: 3px; }
+.brand h1 { font-size: 1.5rem; font-weight: 300; line-height: 1.15; }
+.brand h1 b { font-weight: 700; }
+.brand .sub { font-size: .85rem; color: var(--muted); }
+.apt-chip { display: inline-flex; align-items: center; gap: 10px; padding: 6px 6px 6px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface-2); }
+.apt-chip strong { font-family: var(--f-display); font-size: 1.05rem; }
+.btn-ghost { border: 0; background: transparent; color: var(--accent-ink); padding: 6px 12px; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: .85rem; }
+.btn-ghost:hover { background: var(--accent-soft); }
+
+section { margin-top: 40px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 10px 20px; margin-bottom: 16px; }
+.sec-head .lede { margin-top: 4px; }
+
+/* Cartões de saldo */
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+.tile { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; display: grid; gap: 4px; min-width: 0; }
+.tile.hero { background: var(--accent); border-color: var(--accent); color: #fff; }
+.tile.hero .eyebrow, .tile.hero .delta, .tile.hero .note { color: rgba(255,255,255,.85); }
+.tile .val { font-family: var(--f-display); font-size: 1.85rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.1; }
+.tile .delta { font-size: .85rem; color: var(--ink-2); }
+.tile .note { font-size: .8rem; color: var(--muted); }
+.up { color: var(--good); } .down { color: var(--crit); }
+.tile.hero .up, .tile.hero .down { color: #fff; font-weight: 700; }
+.callout { margin-top: 14px; display: flex; gap: 12px; align-items: flex-start; padding: 12px 16px; background: var(--warn-soft); border-radius: var(--radius); font-size: .9rem; color: var(--ink); }
+.callout .tag { flex: none; font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; background: var(--surface); color: var(--ink-2); border: 1px solid var(--line); }
+
+/* Filtro de período */
+.filter { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; margin-top: 36px; background: var(--bg); padding-block: 10px; border-bottom: 1px solid var(--line); display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; }
+.filter .eyebrow { margin-right: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { border: 1px solid var(--line); background: var(--surface); color: var(--ink); padding: 5px 14px; border-radius: 999px; cursor: pointer; font-weight: 600; font-size: .88rem; }
+.chip:hover { border-color: var(--accent); }
+.chip[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.filter .info { font-size: .82rem; color: var(--muted); }
+.sim-badge { display: inline-flex; align-items: center; gap: 6px; font-size: .78rem; font-weight: 600; color: var(--sim); background: var(--sim-soft); padding: 2px 10px; border-radius: 999px; }
+.sim-badge::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--sim); }
+
+/* Apartamento */
+.apt-grid { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.4fr); gap: 16px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; min-width: 0; }
+.panel > h3 + p { color: var(--ink-2); font-size: .88rem; margin-top: 2px; }
+.kv { display: grid; grid-template-columns: 1fr auto; gap: 6px 16px; margin-top: 14px; }
+.kv dt { color: var(--ink-2); } .kv dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.kv .total { border-top: 1px solid var(--line); padding-top: 8px; font-weight: 700; color: var(--ink); }
+.big-share { display: flex; align-items: baseline; gap: 10px; margin-top: 12px; }
+.big-share .val { font-family: var(--f-display); font-size: 2.2rem; font-weight: 700; }
+.flow { margin-top: 14px; display: grid; gap: 6px; }
+.flow-bar { display: flex; height: 14px; border-radius: 7px; overflow: hidden; background: var(--surface-2); gap: 2px; }
+.flow-bar span { display: block; height: 100%; }
+.flow-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .84rem; color: var(--ink-2); }
+.flow-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+
+/* Tabelas */
+.table-wrap { overflow-x: auto; margin-top: 12px; }
+table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+th, td { padding: 7px 10px; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; white-space: normal; }
+thead th { font-size: .72rem; text-transform: uppercase; letter-spacing: .07em; color: var(--muted); font-weight: 700; border-bottom: 1px solid var(--axis); }
+tbody td { border-bottom: 1px solid var(--line); }
+tr.grp td { background: var(--surface-2); font-weight: 700; font-family: var(--f-display); font-size: .82rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-2); }
+tr.sub td { font-weight: 700; }
+tr.tot td { font-weight: 700; border-top: 2px solid var(--axis); border-bottom: 0; }
+tr.me td { background: var(--accent-soft); font-weight: 700; }
+.pctbar { display: inline-block; height: 6px; border-radius: 3px; background: var(--accent); vertical-align: middle; margin-left: 8px; opacity: .8; }
+.neg { color: var(--crit); }
+
+/* Gráficos */
+.charts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.chart-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px 20px; min-width: 0; display: grid; gap: 6px; align-content: start; }
+.chart-card.wide { grid-column: 1 / -1; }
+.chart-card .how { font-size: .87rem; color: var(--ink-2); }
+.chart-box { position: relative; height: 290px; margin-top: 8px; }
+.chart-card.wide .chart-box { height: 320px; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: .84rem; color: var(--ink-2); }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 6px; vertical-align: -2px; }
+.legend i.line { height: 3px; border-radius: 2px; vertical-align: 3px; }
+details.data-table { margin-top: 6px; font-size: .85rem; }
+details.data-table summary { cursor: pointer; color: var(--accent-ink); font-weight: 600; }
+
+/* Fatos */
+.facts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.fact { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--s2); border-radius: var(--radius); padding: 14px 18px; display: grid; gap: 4px; min-width: 0; }
+.fact .v { font-family: var(--f-display); font-weight: 700; font-size: 1.3rem; }
+.fact p { color: var(--ink-2); font-size: .9rem; }
+
+footer { margin-top: 48px; padding-top: 16px; border-top: 1px solid var(--line); color: var(--muted); font-size: .82rem; display: grid; gap: 6px; }
+
+/* Entrada */
+.gate { min-height: 100%; display: grid; place-items: center; padding-inline: 20px; padding-block: 48px; }
+.gate-card { width: min(440px, 100%); background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 28px; display: grid; gap: 16px; }
+.gate-card h1 { font-size: 1.6rem; font-weight: 300; line-height: 1.2; }
+.gate-card h1 b { font-weight: 700; }
+.gate-card label { font-weight: 600; font-size: .9rem; }
+.gate-row { display: flex; gap: 8px; }
+.gate-row input { flex: 1; min-width: 0; font-size: 1.4rem; font-family: var(--f-display); font-weight: 700; letter-spacing: .1em; padding: 10px 14px; border: 1px solid var(--axis); border-radius: 8px; background: var(--bg); color: var(--ink); }
+.btn { border: 0; background: var(--accent); color: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; }
+.btn:hover { background: var(--accent-ink); }
+.gate .err { color: var(--crit); font-size: .88rem; min-height: 1.3em; }
+.gate .small { color: var(--muted); font-size: .82rem; }
+
+@media (max-width: 900px) {
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .apt-grid, .charts, .facts { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 480px) {
+  .wrap { padding-inline: 16px; }
+  .tiles { grid-template-columns: minmax(0, 1fr); }
+  .tile .val { font-size: 1.6rem; }
+  .chart-box { height: 250px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div id="gate" class="gate">
+  <form class="gate-card" id="gate-form" novalidate>
+    <div class="brand"><span class="brand-mark"></span><div>
+      <div class="eyebrow">Prestação de contas</div>
+      <h1>Condomínio <b>Geraldo José Ribeiro</b></h1>
+    </div></div>
+    <p class="lede">Painel com os saldos, receitas e despesas do condomínio, mês a mês, e quanto o seu apartamento pagou e para onde foi esse dinheiro.</p>
+    <div style="display:grid;gap:6px">
+      <label for="apt-input">Número do seu apartamento</label>
+      <div class="gate-row">
+        <input id="apt-input" inputmode="numeric" autocomplete="off" maxlength="3" placeholder="Ex.: 302" aria-describedby="gate-err">
+        <button class="btn" type="submit">Entrar</button>
+      </div>
+      <div class="err" id="gate-err" role="alert"></div>
+    </div>
+    <p class="small">Apartamentos 101 a 502. O número só identifica qual unidade o painel destaca.</p>
+  </form>
+</div>
+
+<div id="app" hidden>
+  <header class="band"><div class="wrap">
+    <div class="brand"><span class="brand-mark"></span><div>
+      <h1>Condomínio <b>Geraldo José Ribeiro</b></h1>
+      <div class="sub" id="sub-periodo"></div>
+    </div></div>
+    <div class="apt-chip"><span class="eyebrow">Apartamento</span><strong id="apt-label">—</strong><button class="btn-ghost" id="apt-change" type="button">Trocar</button></div>
+  </div></header>
+
+  <main class="wrap">
+    <section id="saldos" aria-labelledby="h-saldos" style="margin-top:28px">
+      <div class="sec-head"><div>
+        <div class="eyebrow" id="saldo-mes"></div>
+        <h2 id="h-saldos">Saldos atuais</h2>
+      </div></div>
+      <div class="tiles" id="tiles"></div>
+      <div class="callout" id="callout"></div>
+    </section>
+
+    <div class="filter" role="group" aria-label="Período analisado">
+      <span class="eyebrow">Período</span>
+      <div class="chips" id="chips"></div>
+      <span class="info" id="period-info"></span>
+    </div>
+
+    <section aria-labelledby="h-apt">
+      <div class="sec-head"><div>
+        <div class="eyebrow">Sua unidade</div>
+        <h2 id="h-apt">O que o apartamento <span id="apt-label-2"></span> pagou e para onde foi</h2>
+        <p class="lede">A sua parte das despesas é proporcional ao que você pagou em relação ao total arrecadado das 10 unidades. O que não foi gasto ficou no saldo do condomínio.</p>
+      </div></div>
+      <div class="apt-grid">
+        <div class="panel" id="apt-paid"></div>
+        <div class="panel" id="apt-spent"></div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-medias">
+      <div class="sec-head"><div>
+        <div class="eyebrow">Média geral</div>
+        <h2 id="h-medias">Quanto entra e sai por mês</h2>
+      </div></div>
+      <div class="tiles" id="avg-tiles"></div>
+    </section>
+
+    <section aria-labelledby="h-dre">
+      <div class="sec-head"><div>
+        <div class="eyebrow">DRE</div>
+        <h2 id="h-dre">Receitas e despesas por categoria</h2>
+        <p class="lede">Cada linha mostra o total do período, quanto ela representa e a média por mês. Na receita, o % é sobre a receita total. Na despesa, é sobre o total de despesas operacionais.</p>
+      </div></div>
+      <div class="panel"><div class="table-wrap"><table id="dre"></table></div></div>
+    </section>
+
+    <section aria-labelledby="h-graf">
+      <div class="sec-head"><div>
+        <div class="eyebrow">Gráficos</div>
+        <h2 id="h-graf">Como as contas evoluíram</h2>
+        <p class="lede">Passe o mouse ou toque nas barras e linhas para ver os valores. <span class="sim-badge">Mês simulado</span> aparece em tom mais claro.</p>
+      </div></div>
+      <div class="charts">
+        <div class="chart-card wide">
+          <h3>Receitas × despesas, mês a mês</h3>
+          <p class="how">Quando a barra laranja passa da azul, o condomínio gastou mais do que arrecadou naquele mês.</p>
+          <div class="legend"><span><i style="background:var(--s1)"></i>Receitas</span><span><i style="background:var(--s2)"></i>Despesas</span><span class="sim-badge">Mês simulado</span></div>
+          <div class="chart-box"><canvas id="c-mensal" role="img" aria-label="Gráfico de barras de receitas e despesas por mês"></canvas></div>
+        </div>
+        <div class="chart-card wide">
+          <h3>Evolução dos saldos</h3>
+          <p class="how">O saldo total soma todas as contas. O Fundo de Reserva e a Taxa Extra aparecem separados a partir de quando os relatórios passaram a informar cada um.</p>
+          <div class="legend"><span><i class="line" style="background:var(--s1)"></i>Saldo total</span><span><i class="line" style="background:var(--s2)"></i>Fundo de reserva</span><span><i class="line" style="background:var(--s3)"></i>Taxa extra</span></div>
+          <div class="chart-box"><canvas id="c-saldo" role="img" aria-label="Gráfico de linhas da evolução dos saldos"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>Para onde vai o dinheiro</h3>
+          <p class="how">As despesas do período escolhido, da maior para a menor. A barra mostra o % sobre o total gasto.</p>
+          <div class="chart-box" style="height:380px"><canvas id="c-comp" role="img" aria-label="Gráfico de barras horizontais da composição das despesas"></canvas></div>
+        </div>
+        <div class="chart-card">
+          <h3>A taxa paga as despesas fixas?</h3>
+          <p class="how">Média por mês de cada ano. Quando as despesas recorrentes ficam acima da receita ordinária, a diferença sai dos fundos.</p>
+          <div class="legend"><span><i style="background:var(--s1)"></i>Receita ordinária (taxa + multas + juros)</span><span><i style="background:var(--s2)"></i>Despesas recorrentes</span></div>
+          <div class="chart-box" style="height:330px"><canvas id="c-cob" role="img" aria-label="Gráfico de barras comparando receita ordinária e despesas recorrentes por ano"></canvas></div>
+          <p class="how" id="cob-text"></p>
+        </div>
+        <div class="chart-card wide">
+          <h3>Quanto cada apartamento pagou</h3>
+          <p class="how">Total pago por unidade no período, com taxa, fundo de reserva, taxa extra, multas e juros. O seu apartamento aparece em destaque. Cobre os meses em que os relatórios identificam a unidade.</p>
+          <div class="chart-box" style="height:280px"><canvas id="c-aptos" role="img" aria-label="Gráfico de barras do total pago por apartamento"></canvas></div>
+          <details class="data-table"><summary>Ver tabela por apartamento</summary><div class="table-wrap"><table id="t-aptos"></table></div></details>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="h-fatos">
+      <div class="sec-head"><div>
+        <div class="eyebrow">Registros</div>
+        <h2 id="h-fatos">Fatos identificados nos relatórios</h2>
+        <p class="lede">Valores que aparecem nas prestações de contas e que precisam de esclarecimento da administradora.</p>
+      </div></div>
+      <div class="facts" id="facts"></div>
+    </section>
+
+    <footer>
+      <p id="foot-1"></p>
+      <p>Fonte: prestações de contas mensais do condomínio (demonstrativos, balancetes e extratos). Análise independente: o painel organiza os números dos relatórios e não substitui a prestação de contas oficial.</p>
+      <p id="foot-sim"></p>
+    </footer>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.js"></script>
+<script>
+const D = {"meta": {"gerado": "22/10/2026", "inicio": "mai/23", "fim": "ago/26", "ultimo": "202608", "anterior": "202607", "simulados": ["jul/23", "ago/24"]}, "cats": {"rec": ["Taxa condominial", "Fundo de reserva", "Taxa extra", "Multas", "Juros", "Multas e juros (não discriminados)", "Estornos e devoluções", "Outros créditos"], "recorr": ["Taxa de administração (síndico profissional)", "Limpeza e conservação", "Energia elétrica", "Água e esgoto", "Contador", "Seguro obrigatório", "Internet", "Jardinagem", "Despesas bancárias", "Impostos"], "naorec": ["Segurança eletrônica (câmeras e sensores)", "Dedetização", "Manutenção de portão, portas e portaria", "Serralheria", "Hidráulica e esgoto (caixa de gordura)", "Extintores de incêndio", "Reparos e pintura", "Cartório (registro de atas)", "Lâmpadas e materiais", "Chaveiro, cópias de chaves e TAGs", "Mobiliário e utensílios"], "ajuste": ["Débitos estornados / pagos em duplicidade"]}, "months": [{"k": "202305", "l": "mai/23", "sim": false, "rec": {"Taxa condominial": 1700.0, "Estornos e devoluções": 514.53}, "desp": {"Seguro obrigatório": 165.64, "Dedetização": 355.11, "Taxa de administração (síndico profissional)": 700.0, "Limpeza e conservação": 500.0, "Chaveiro, cópias de chaves e TAGs": 56.0, "Débitos estornados / pagos em duplicidade": 514.53, "Despesas bancárias": 11.61}, "si": 113.76, "sf": 25.4, "cc": null, "fr": null, "te": null}, {"k": "202306", "l": "jun/23", "sim": false, "rec": {"Taxa condominial": 2000.0, "Multas e juros (não discriminados)": 8.59}, "desp": {"Seguro obrigatório": 166.12, "Limpeza e conservação": 500.0, "Taxa de administração (síndico profissional)": 700.0, "Energia elétrica": 84.79, "Água e esgoto": 49.4, "Manutenção de portão, portas e portaria": 300.0, "Despesas bancárias": 14.16}, "si": 25.4, "sf": 219.52, "cc": null, "fr": null, "te": null}, {"k": "202307", "l": "jul/23", "sim": true, "rec": {"Taxa condominial": 1360.0, "Fundo de reserva": 240.0, "Multas e juros (não discriminados)": 3.83}, "desp": {"Taxa de administração (síndico profissional)": 700.0, "Limpeza e conservação": 500.0, "Energia elétrica": 90.76, "Água e esgoto": 67.91, "Contador": 130.0, "Seguro obrigatório": 165.64, "Despesas bancárias": 14.99}, "si": 219.52, "sf": 154.05, "cc": null, "fr": null, "te": null}, {"k": "202308", "l": "ago/23", "sim": false, "rec": {"Taxa condominial": 2040.0, "Fundo de reserva": 360.0, "Multas e juros (não discriminados)": 11.12}, "desp": {"Energia elétrica": 79.23, "Chaveiro, cópias de chaves e TAGs": 30.0, "Contador": 130.0, "Taxa de administração (síndico profissional)": 700.0, "Limpeza e conservação": 500.0, "Manutenção de portão, portas e portaria": 278.0, "Água e esgoto": 73.33, "Despesas bancárias": 12.94}, "si": 154.05, "sf": 761.67, "cc": null, "fr": 360.0, "te": null}, {"k": "202309", "l": "set/23", "sim": false, "rec": {"Taxa condominial": 1530.0, "Fundo de reserva": 270.0, "Multas e juros (não discriminados)": 8.52, "Estornos e devoluções": 86.36}, "desp": {"Taxa de administração (síndico profissional)": 700.0, "Débitos estornados / pagos em duplicidade": 86.36, "Limpeza e conservação": 500.0, "Contador": 130.0, "Extintores de incêndio": 520.0, "Água e esgoto": 73.35, "Despesas bancárias": 12.9}, "si": 761.67, "sf": 633.94, "cc": null, "fr": 660.0, "te": null}, {"k": "202310", "l": "out/23", "sim": false, "rec": {"Taxa condominial": 1870.0, "Fundo de reserva": 330.0, "Multas e juros (não discriminados)": 11.12, "Estornos e devoluções": 143.5}, "desp": {"Energia elétrica": 114.37, "Taxa de administração (síndico profissional)": 700.0, "Limpeza e conservação": 500.0, "Contador": 130.0, "Água e esgoto": 73.35, "Despesas bancárias": 25.8, "Mobiliário e utensílios": 430.5, "Manutenção de portão, portas e portaria": 260.0}, "si": 633.94, "sf": 754.54, "cc": null, "fr": 299.5, "te": null}, {"k": "202311", "l": "nov/23", "sim": false, "rec": {"Taxa condominial": 1360.0, "Juros": 0.21, "Multas": 4.0, "Fundo de reserva": 240.0}, "desp": {"Energia elétrica": 99.27, "Água e esgoto": 73.35, "Taxa de administração (síndico profissional)": 700.0, "Contador": 130.0, "Limpeza e conservação": 500.0, "Lâmpadas e materiais": 67.6, "Despesas bancárias": 14.19}, "si": 754.54, "sf": 774.34, "cc": 302.44, "fr": 471.9, "te": null}, {"k": "202312", "l": "dez/23", "sim": false, "rec": {"Taxa condominial": 1530.0, "Juros": 0.35, "Multas": 4.0, "Fundo de reserva": 270.0}, "desp": {"Energia elétrica": 98.33, "Água e esgoto": 65.4, "Taxa de administração (síndico profissional)": 700.0, "Contador": 130.0, "Limpeza e conservação": 500.0, "Cartório (registro de atas)": 110.16, "Hidráulica e esgoto (caixa de gordura)": 278.5, "Mobiliário e utensílios": 144.9, "Despesas bancárias": 33.86}, "si": 774.34, "sf": 517.54, "cc": 309.2, "fr": 208.34, "te": null}, {"k": "202401", "l": "jan/24", "sim": false, "rec": {"Taxa condominial": 1360.0, "Juros": 0.63, "Multas": 4.0, "Fundo de reserva": 240.0}, "desp": {"Energia elétrica": 43.05, "Água e esgoto": 66.1, "Taxa de administração (síndico profissional)": 700.0, "Contador": 130.0, "Limpeza e conservação": 500.0, "Lâmpadas e materiais": 29.9, "Despesas bancárias": 15.9}, "si": 517.54, "sf": 637.22, "cc": 218.78, "fr": 418.44, "te": null}, {"k": "202402", "l": "fev/24", "sim": false, "rec": {"Taxa condominial": 1360.0, "Juros": 2.1, "Multas": 8.0, "Fundo de reserva": 240.0, "Estornos e devoluções": 535.0}, "desp": {"Energia elétrica": 163.31, "Água e esgoto": 76.41, "Taxa de administração (síndico profissional)": 700.0, "Contador": 130.0, "Limpeza e conservação": 535.0, "Jardinagem": 60.0, "Segurança eletrônica (câmeras e sensores)": 213.8, "Despesas bancárias": 17.9, "Débitos estornados / pagos em duplicidade": 535.0}, "si": 637.22, "sf": 350.9, "cc": -93.74, "fr": 444.64, "te": null}, {"k": "202403", "l": "mar/24", "sim": false, "rec": {"Taxa condominial": 1870.0, "Juros": 0.28, "Multas": 4.0, "Fundo de reserva": 330.0}, "desp": {"Energia elétrica": 116.15, "Água e esgoto": 68.13, "Taxa de administração (síndico profissional)": 700.0, "Seguro obrigatório": 150.16, "Limpeza e conservação": 535.0, "Manutenção de portão, portas e portaria": 150.0, "Hidráulica e esgoto (caixa de gordura)": 357.0, "Despesas bancárias": 19.9}, "si": 350.9, "sf": 458.84, "cc": 191.2, "fr": 267.64, "te": null}, {"k": "202404", "l": "abr/24", "sim": false, "rec": {"Taxa condominial": 1700.0, "Juros": 0.56, "Multas": 8.0, "Fundo de reserva": 300.0}, "desp": {"Energia elétrica": 132.16, "Água e esgoto": 68.15, "Taxa de administração (síndico profissional)": 700.0, "Seguro obrigatório": 150.17, "Contador": 130.0, "Limpeza e conservação": 535.0, "Lâmpadas e materiais": 34.4, "Despesas bancárias": 36.1}, "si": 458.84, "sf": 681.42, "cc": 148.18, "fr": 533.24, "te": null}, {"k": "202405", "l": "mai/24", "sim": false, "rec": {"Taxa condominial": 1530.0, "Juros": 1.68, "Multas": 8.0, "Fundo de reserva": 270.0}, "desp": {"Energia elétrica": 206.68, "Água e esgoto": 76.41, "Taxa de administração (síndico profissional)": 700.0, "Seguro obrigatório": 150.17, "Contador": 130.0, "Limpeza e conservação": 535.0, "Jardinagem": 60.0, "Despesas bancárias": 4.26}, "si": 681.42, "sf": 628.58, "cc": -174.66, "fr": 803.24, "te": null}, {"k": "202406", "l": "jun/24", "sim": false, "rec": {"Taxa condominial": 2210.0, "Juros": 39.55, "Multas": 24.0, "Fundo de reserva": 390.0, "Estornos e devoluções": 492.2}, "desp": {"Energia elétrica": 120.68, "Água e esgoto": 68.17, "Taxa de administração (síndico profissional)": 700.0, "Seguro obrigatório": 150.17, "Contador": 130.0, "Limpeza e conservação": 535.0, "Despesas bancárias": 34.9, "Débitos estornados / pagos em duplicidade": 492.2}, "si": 628.58, "sf": 1553.21, "cc": 359.97, "fr": 1193.24, "te": null}, {"k": "202407", "l": "jul/24", "sim": false, "rec": {"Taxa condominial": 1870.0, "Juros": 24.38, "Multas": 24.0, "Fundo de reserva": 330.0}, "desp": {"Energia elétrica": 164.27, "Água e esgoto": 93.07, "Taxa de administração (síndico profissional)": 700.0, "Contador": 130.0, "Limpeza e conservação": 535.0, "Chaveiro, cópias de chaves e TAGs": 50.0, "Despesas bancárias": 36.16}, "si": 1553.21, "sf": 2093.09, "cc": 619.85, "fr": 1473.24, "te": null}, {"k": "202408", "l": "ago/24", "sim": true, "rec": {"Taxa condominial": 1190.0, "Fundo de reserva": 210.0}, "desp": {"Taxa de administração (síndico profissional)": 700.0, "Limpeza e conservação": 535.0, "Água e esgoto": 78.29, "Contador": 130.0, "Despesas bancárias": 33.89}, "si": 2093.09, "sf": 2015.91, "cc": 542.67, "fr": 1473.24, "te": null}, {"k": "202409", "l": "set/24", "sim": false, "rec": {"Taxa condominial": 1870.0, "Juros": 11.13, "Multas": 28.0, "Fundo de reserva": 330.0}, "desp": {"Energia elétrica": 79.48, "Água e esgoto": 76.62, "Taxa de administração (síndico profissional)": 700.0, "Contador": 130.0, "Limpeza e conservação": 535.0, "Lâmpadas e materiais": 26.9, "Despesas bancárias": 22.0}, "si": 2015.91, "sf": 2685.04, "cc": 908.7, "fr": 1776.34, "te": null}, {"k": "202410", "l": "out/24", "sim": false, "rec": {"Taxa condominial": 1700.0, "Juros": 3.01, "Multas": 16.0, "Fundo de reserva": 300.0}, "desp": {"Energia elétrica": 92.38, "Água e esgoto": 76.63, "Taxa de administração (síndico profissional)": 700.0, "Contador": 130.0, "Limpeza e conservação": 535.0, "Extintores de incêndio": 228.0, "Segurança eletrônica (câmeras e sensores)": 1231.59, "Despesas bancárias": 48.8}, "si": 2685.04, "sf": 1661.65, "cc": 1044.9, "fr": 616.75, "te": null}, {"k": "202411", "l": "nov/24", "sim": false, "rec": {"Taxa condominial": 1190.0, "Juros": 0.56, "Multas": 12.0, "Fundo de reserva": 210.0}, "desp": {"Energia elétrica": 93.78, "Água e esgoto": 68.35, "Taxa de administração (síndico profissional)": 700.0, "Contador": 130.0, "Limpeza e conservação": 535.0, "Jardinagem": 60.0, "Manutenção de portão, portas e portaria": 180.0, "Hidráulica e esgoto (caixa de gordura)": 180.0, "Lâmpadas e materiais": 105.9, "Reparos e pintura": 120.0, "Despesas bancárias": 24.0}, "si": 1661.65, "sf": 877.18, "cc": 636.33, "fr": 240.85, "te": null}, {"k": "202412", "l": "dez/24", "sim": false, "rec": {"Taxa condominial": 1870.0, "Juros": 9.38, "Multas": 32.0, "Fundo de reserva": 330.0, "Estornos e devoluções": 535.0}, "desp": {"Energia elétrica": 127.71, "Água e esgoto": 68.34, "Taxa de administração (síndico profissional)": 700.0, "Contador": 130.0, "Limpeza e conservação": 535.0, "Jardinagem": 60.0, "Despesas bancárias": 50.06, "Débitos estornados / pagos em duplicidade": 535.0}, "si": 877.18, "sf": 1447.45, "cc": 876.6, "fr": 570.85, "te": null}, {"k": "202501", "l": "jan/25", "sim": false, "rec": {"Taxa condominial": 2720.0, "Juros": 44.17, "Multas": 32.0, "Fundo de reserva": 480.0}, "desp": {"Energia elétrica": 34.92, "Água e esgoto": 69.4, "Taxa de administração (síndico profissional)": 700.0, "Contador": 130.0, "Limpeza e conservação": 535.0, "Dedetização": 490.0, "Cartório (registro de atas)": 160.81, "Despesas bancárias": 35.19}, "si": 1447.45, "sf": 2568.3, "cc": 1517.45, "fr": 1050.85, "te": null}, {"k": "202502", "l": "fev/25", "sim": false, "rec": {"Taxa condominial": 1360.0, "Juros": 0.3, "Multas": 18.0, "Fundo de reserva": 240.0, "Taxa extra": 800.0}, "desp": {"Energia elétrica": 73.04, "Água e esgoto": 81.44, "Taxa de administração (síndico profissional)": 700.0, "Contador": 130.0, "Limpeza e conservação": 572.45, "Manutenção de portão, portas e portaria": 170.0, "Despesas bancárias": 21.26}, "si": 2568.3, "sf": 3238.41, "cc": 1147.56, "fr": 1290.85, "te": 800.0}, {"k": "202503", "l": "mar/25", "sim": false, "rec": {"Taxa condominial": 1700.0, "Juros": 5.5, "Multas": 24.0, "Fundo de reserva": 300.0, "Taxa extra": 1000.0}, "desp": {"Energia elétrica": 61.56, "Água e esgoto": 63.81, "Taxa de administração (síndico profissional)": 700.0, "Seguro obrigatório": 118.89, "Contador": 130.0, "Limpeza e conservação": 572.45, "Jardinagem": 70.0, "Despesas bancárias": 46.8}, "si": 3238.41, "sf": 4504.4, "cc": 1113.55, "fr": 1590.85, "te": 1800.0}, {"k": "202504", "l": "abr/25", "sim": false, "rec": {"Taxa condominial": 1870.0, "Juros": 15.2, "Multas": 30.0, "Fundo de reserva": 330.0, "Taxa extra": 1100.0}, "desp": {"Energia elétrica": 63.28, "Água e esgoto": 63.95, "Taxa de administração (síndico profissional)": 700.0, "Seguro obrigatório": 118.89, "Contador": 130.0, "Limpeza e conservação": 572.45, "Jardinagem": 70.0, "Lâmpadas e materiais": 108.4, "Despesas bancárias": 23.0}, "si": 4504.4, "sf": 5999.63, "cc": 1178.78, "fr": 1920.85, "te": 2900.0}, {"k": "202505", "l": "mai/25", "sim": false, "rec": {"Taxa condominial": 1870.0, "Juros": 9.9, "Multas": 36.0, "Fundo de reserva": 330.0, "Taxa extra": 1100.0}, "desp": {"Energia elétrica": 62.8, "Água e esgoto": 63.69, "Taxa de administração (síndico profissional)": 700.0, "Seguro obrigatório": 118.89, "Contador": 130.0, "Limpeza e conservação": 572.45, "Lâmpadas e materiais": 42.5, "Despesas bancárias": 49.58}, "si": 5999.63, "sf": 7605.62, "cc": 1354.77, "fr": 2250.85, "te": 4000.0}, {"k": "202506", "l": "jun/25", "sim": false, "rec": {"Taxa condominial": 1700.0, "Juros": 1.6, "Multas": 24.0, "Fundo de reserva": 300.0, "Taxa extra": 1000.0}, "desp": {"Energia elétrica": 69.13, "Água e esgoto": 72.51, "Taxa de administração (síndico profissional)": 700.0, "Seguro obrigatório": 118.89, "Contador": 130.0, "Limpeza e conservação": 572.45, "Chaveiro, cópias de chaves e TAGs": 7.0, "Despesas bancárias": 32.9}, "si": 7605.62, "sf": 8928.34, "cc": 1377.49, "fr": 2550.85, "te": 5000.0}, {"k": "202507", "l": "jul/25", "sim": false, "rec": {"Taxa condominial": 1360.0, "Juros": 1.9, "Multas": 12.0, "Fundo de reserva": 240.0, "Taxa extra": 800.0}, "desp": {"Energia elétrica": 81.18, "Água e esgoto": 72.51, "Taxa de administração (síndico profissional)": 700.0, "Seguro obrigatório": 118.89, "Contador": 130.0, "Limpeza e conservação": 572.45, "Jardinagem": 70.0, "Lâmpadas e materiais": 28.5, "Cartório (registro de atas)": 147.45, "Hidráulica e esgoto (caixa de gordura)": 379.48, "Despesas bancárias": 32.9}, "si": 8928.34, "sf": 9008.88, "cc": 418.03, "fr": 2790.85, "te": 5800.0}, {"k": "202508", "l": "ago/25", "sim": false, "rec": {"Taxa condominial": 1870.0, "Juros": 34.9, "Fundo de reserva": 330.0, "Taxa extra": 1100.0}, "desp": {"Energia elétrica": 79.85, "Água e esgoto": 72.57, "Taxa de administração (síndico profissional)": 700.0, "Seguro obrigatório": 118.89, "Limpeza e conservação": 572.45, "Despesas bancárias": 33.9, "Impostos": 70.52, "Contador": 130.0, "Chaveiro, cópias de chaves e TAGs": 35.0}, "si": 9008.88, "sf": 10530.6, "cc": 509.75, "fr": 3120.85, "te": 6900.0}, {"k": "202509", "l": "set/25", "sim": false, "rec": {"Taxa condominial": 1700.0, "Multas": 18.0, "Juros": 10.8, "Fundo de reserva": 300.0, "Taxa extra": 1000.0}, "desp": {"Energia elétrica": 89.45, "Água e esgoto": 72.57, "Taxa de administração (síndico profissional)": 700.0, "Limpeza e conservação": 572.45, "Despesas bancárias": 20.0, "Contador": 130.0, "Dedetização": 650.0, "Cartório (registro de atas)": 147.45}, "si": 10530.6, "sf": 11177.48, "cc": 1026.63, "fr": 3150.85, "te": 7000.0}, {"k": "202510", "l": "out/25", "sim": false, "rec": {"Taxa condominial": 1530.0, "Multas": 14.0, "Juros": 1.21, "Fundo de reserva": 270.0, "Taxa extra": 1350.0}, "desp": {"Energia elétrica": 82.5, "Água e esgoto": 72.51, "Taxa de administração (síndico profissional)": 700.0, "Limpeza e conservação": 572.45, "Jardinagem": 80.0, "Despesas bancárias": 48.09, "Contador": 130.0, "Chaveiro, cópias de chaves e TAGs": 85.0, "Manutenção de portão, portas e portaria": 120.0, "Segurança eletrônica (câmeras e sensores)": 5595.0, "Extintores de incêndio": 330.0}, "si": 11177.48, "sf": 6527.14, "cc": -3623.71, "fr": 3150.85, "te": 7000.0}, {"k": "202511", "l": "nov/25", "sim": false, "rec": {"Taxa condominial": 1530.0, "Multas": 7.0, "Juros": 0.88, "Fundo de reserva": 270.0, "Taxa extra": 1350.0}, "desp": {"Energia elétrica": 92.08, "Taxa de administração (síndico profissional)": 700.0, "Limpeza e conservação": 572.45, "Jardinagem": 70.0, "Despesas bancárias": 34.9, "Contador": 130.0, "Internet": 99.9}, "si": 6528.14, "sf": 7986.69, "cc": 3430.84, "fr": 3150.85, "te": 1405.0}, {"k": "202512", "l": "dez/25", "sim": false, "rec": {"Taxa condominial": 2209.9, "Multas": 41.0, "Juros": 20.07, "Fundo de reserva": 389.99, "Outros créditos": 0.1, "Taxa extra": 1899.91}, "desp": {"Energia elétrica": 93.9, "Água e esgoto": 145.02, "Taxa de administração (síndico profissional)": 700.0, "Limpeza e conservação": 572.45, "Jardinagem": 70.0, "Despesas bancárias": 41.4, "Contador": 130.0, "Internet": 146.55, "Lâmpadas e materiais": 10.5, "Reparos e pintura": 400.0}, "si": 7986.69, "sf": 10237.84, "cc": 3869.15, "fr": 3452.99, "te": 2915.7}, {"k": "202601", "l": "jan/26", "sim": false, "rec": {"Taxa condominial": 1700.0, "Multas": 7.0, "Juros": 0.55, "Fundo de reserva": 300.0, "Taxa extra": 1500.0}, "desp": {"Energia elétrica": 100.77, "Taxa de administração (síndico profissional)": 700.0, "Limpeza e conservação": 572.45, "Despesas bancárias": 41.4, "Contador": 130.0, "Cartório (registro de atas)": 168.29, "Internet": 99.9, "Lâmpadas e materiais": 42.5, "Serralheria": 800.0}, "si": 10237.84, "sf": 11090.08, "cc": 2917.49, "fr": 3753.64, "te": 4418.95}, {"k": "202602", "l": "fev/26", "sim": false, "rec": {"Taxa condominial": 2090.0, "Multas": 29.6, "Juros": 2.4, "Fundo de reserva": 330.0, "Taxa extra": 1650.0}, "desp": {"Energia elétrica": 85.88, "Água e esgoto": 72.51, "Taxa de administração (síndico profissional)": 750.0, "Limpeza e conservação": 649.0, "Jardinagem": 80.0, "Despesas bancárias": 41.66, "Contador": 140.0, "Internet": 99.9}, "si": 11090.08, "sf": 13273.13, "cc": 3104.94, "fr": 4086.24, "te": 6081.95}, {"k": "202603", "l": "mar/26", "sim": false, "rec": {"Taxa condominial": 1520.0, "Multas": 14.8, "Juros": 0.84, "Fundo de reserva": 240.0, "Taxa extra": 1200.0}, "desp": {"Energia elétrica": 84.42, "Água e esgoto": 164.96, "Taxa de administração (síndico profissional)": 750.0, "Seguro obrigatório": 131.87, "Limpeza e conservação": 649.0, "Despesas bancárias": 40.4, "Contador": 140.0, "Internet": 99.9, "Lâmpadas e materiais": 52.5}, "si": 13273.13, "sf": 14135.72, "cc": 2519.91, "fr": 4327.51, "te": 7288.3}, {"k": "202604", "l": "abr/26", "sim": false, "rec": {"Taxa condominial": 1900.0, "Multas": 22.2, "Juros": 4.56, "Fundo de reserva": 300.0, "Taxa extra": 1500.0}, "desp": {"Energia elétrica": 69.79, "Seguro obrigatório": 131.89, "Limpeza e conservação": 649.0, "Jardinagem": 80.0, "Despesas bancárias": 40.4, "Contador": 140.0, "Internet": 99.9}, "si": 14135.72, "sf": 16651.5, "cc": 3222.61, "fr": 4629.69, "te": 8799.2}, {"k": "202605", "l": "mai/26", "sim": false, "rec": {"Taxa condominial": 1900.0, "Multas": 22.2, "Juros": 4.92, "Fundo de reserva": 300.0, "Taxa extra": 1500.0}, "desp": {"Energia elétrica": 109.18, "Água e esgoto": 83.85, "Taxa de administração (síndico profissional)": 750.0, "Seguro obrigatório": 131.89, "Limpeza e conservação": 649.0, "Despesas bancárias": 85.4, "Contador": 140.0, "Internet": 99.9}, "si": 16651.5, "sf": 18329.4, "cc": 3087.25, "fr": 4931.9, "te": 10310.25}, {"k": "202606", "l": "jun/26", "sim": false, "rec": {"Taxa condominial": 1900.0, "Multas": 22.2, "Juros": 4.08, "Fundo de reserva": 300.0, "Taxa extra": 1500.0}, "desp": {"Energia elétrica": 106.75, "Água e esgoto": 83.85, "Taxa de administração (síndico profissional)": 750.0, "Seguro obrigatório": 131.89, "Limpeza e conservação": 649.0, "Jardinagem": 80.0, "Despesas bancárias": 40.4, "Contador": 140.0, "Internet": 102.13, "Lâmpadas e materiais": 58.9}, "si": 18329.4, "sf": 19912.76, "cc": 2857.77, "fr": 5234.04, "te": 11820.95}, {"k": "202607", "l": "jul/26", "sim": false, "rec": {"Taxa condominial": 1710.0, "Multas": 22.2, "Juros": 5.52, "Fundo de reserva": 270.0, "Taxa extra": 1350.0}, "desp": {"Energia elétrica": 109.97, "Água e esgoto": 83.91, "Taxa de administração (síndico profissional)": 750.0, "Seguro obrigatório": 131.89, "Limpeza e conservação": 649.0, "Despesas bancárias": 55.4, "Impostos": 40.0, "Contador": 140.0, "Chaveiro, cópias de chaves e TAGs": 83.8, "Dedetização": 690.0, "Internet": 99.9, "Serralheria": 450.0, "Mobiliário e utensílios": 60.0, "Hidráulica e esgoto (caixa de gordura)": 379.84}, "si": 19912.76, "sf": 19546.77, "cc": 858.22, "fr": 5506.3, "te": 13182.25}, {"k": "202608", "l": "ago/26", "sim": false, "rec": {"Taxa condominial": 1900.0, "Multas": 22.2, "Juros": 9.48, "Fundo de reserva": 300.0, "Taxa extra": 1500.0}, "desp": {"Energia elétrica": 111.21, "Água e esgoto": 83.91, "Taxa de administração (síndico profissional)": 750.0, "Seguro obrigatório": 131.89, "Limpeza e conservação": 649.0, "Despesas bancárias": 53.3, "Impostos": 70.16, "Contador": 140.0, "Internet": 99.9}, "si": 19546.77, "sf": 21189.08, "cc": 684.99, "fr": 5808.89, "te": 14695.2}], "units": {"101": {"202312": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202401": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202402": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202403": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 1}, "202404": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.07, "n": 1, "atr": 1}, "202405": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202406": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202407": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.35, "n": 1, "atr": 1}, "202409": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202410": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202411": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202412": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.42, "n": 1, "atr": 1}, "202501": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202502": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.1, "n": 1, "atr": 1}, "202503": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202504": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202505": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202506": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202507": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202508": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202509": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202510": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202511": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202512": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202601": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202602": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202603": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202604": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202605": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202606": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202607": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202608": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202408": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}}, "102": {"202403": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 1}, "202404": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.49, "n": 1, "atr": 1}, "202405": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.91, "n": 1, "atr": 1}, "202406": {"taxa": 510.0, "fr": 90.0, "te": 0.0, "acr": 35.16, "n": 3, "atr": 2}, "202407": {"taxa": 510.0, "fr": 90.0, "te": 0.0, "acr": 30.21, "n": 3, "atr": 2}, "202410": {"taxa": 340.0, "fr": 60.0, "te": 0.0, "acr": 10.87, "n": 2, "atr": 2}, "202412": {"taxa": 340.0, "fr": 60.0, "te": 0.0, "acr": 10.38, "n": 2, "atr": 2}, "202501": {"taxa": 340.0, "fr": 60.0, "te": 0.0, "acr": 14.71, "n": 2, "atr": 1}, "202502": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202503": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202504": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202505": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 1}, "202506": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202507": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202508": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202509": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202510": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202511": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202512": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202601": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202602": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202603": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202604": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 8.12, "n": 1, "atr": 1}, "202605": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202606": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202607": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202608": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}}, "201": {"202312": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202401": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202402": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 5.19, "n": 1, "atr": 1}, "202404": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202406": {"taxa": 510.0, "fr": 90.0, "te": 0.0, "acr": 23.76, "n": 3, "atr": 3}, "202409": {"taxa": 340.0, "fr": 60.0, "te": 0.0, "acr": 14.44, "n": 2, "atr": 2}, "202410": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202411": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202501": {"taxa": 340.0, "fr": 60.0, "te": 0.0, "acr": 6.45, "n": 2, "atr": 1}, "202502": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202504": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202505": {"taxa": 340.0, "fr": 60.0, "te": 200.0, "acr": 11.9, "n": 2, "atr": 1}, "202506": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202507": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.1, "n": 1, "atr": 1}, "202508": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.2, "n": 1, "atr": 1}, "202509": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.1, "n": 1, "atr": 1}, "202510": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202511": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202512": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202601": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202602": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 7.52, "n": 1, "atr": 1}, "202603": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202604": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202605": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202606": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202607": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 7.76, "n": 1, "atr": 1}, "202608": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202408": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}}, "202": {"202312": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202403": {"taxa": 510.0, "fr": 90.0, "te": 0.0, "acr": 0.0, "n": 3, "atr": 2}, "202404": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202405": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202406": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202407": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202409": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202410": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202412": {"taxa": 340.0, "fr": 60.0, "te": 0.0, "acr": 5.61, "n": 2, "atr": 1}, "202501": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202502": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202503": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202504": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202505": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.3, "n": 1, "atr": 1}, "202506": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202507": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202508": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202509": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202510": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202511": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202512": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202601": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202602": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 7.52, "n": 1, "atr": 1}, "202603": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 7.52, "n": 1, "atr": 1}, "202604": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 8.0, "n": 1, "atr": 1}, "202605": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 7.64, "n": 1, "atr": 1}, "202606": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 7.64, "n": 1, "atr": 1}, "202608": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 11.24, "n": 1, "atr": 1}, "202408": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}}, "301": {"202312": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.35, "n": 1, "atr": 1}, "202401": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.63, "n": 1, "atr": 1}, "202402": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.91, "n": 1, "atr": 1}, "202403": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 1}, "202404": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202405": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.77, "n": 1, "atr": 1}, "202406": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.63, "n": 1, "atr": 1}, "202407": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 5.4, "n": 1, "atr": 1}, "202409": {"taxa": 340.0, "fr": 60.0, "te": 0.0, "acr": 10.59, "n": 2, "atr": 2}, "202410": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202411": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.14, "n": 1, "atr": 1}, "202412": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.49, "n": 1, "atr": 1}, "202501": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202502": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.1, "n": 1, "atr": 1}, "202503": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.4, "n": 1, "atr": 1}, "202504": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.5, "n": 1, "atr": 1}, "202505": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.6, "n": 1, "atr": 1}, "202506": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.6, "n": 1, "atr": 1}, "202507": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 7.8, "n": 1, "atr": 1}, "202508": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.5, "n": 2, "atr": 1}, "202509": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.5, "n": 1, "atr": 1}, "202510": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 7.77, "n": 1, "atr": 1}, "202511": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 7.88, "n": 1, "atr": 1}, "202512": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 9.2, "n": 1, "atr": 1}, "202601": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202602": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 8.36, "n": 1, "atr": 1}, "202603": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 8.12, "n": 1, "atr": 1}, "202604": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202605": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 8.36, "n": 1, "atr": 1}, "202606": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 8.12, "n": 1, "atr": 1}, "202607": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 9.08, "n": 1, "atr": 1}}, "302": {"202312": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202401": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202402": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 1}, "202403": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 1}, "202404": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202405": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202406": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202407": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.07, "n": 1, "atr": 1}, "202409": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.42, "n": 1, "atr": 1}, "202410": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202411": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.14, "n": 1, "atr": 1}, "202412": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.07, "n": 1, "atr": 1}, "202501": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202502": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.1, "n": 1, "atr": 1}, "202503": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.7, "n": 1, "atr": 1}, "202504": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 7.2, "n": 1, "atr": 1}, "202505": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 7.1, "n": 1, "atr": 1}, "202506": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.6, "n": 1, "atr": 1}, "202507": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202508": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202509": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202510": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202511": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202512": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 7.55, "n": 1, "atr": 1}, "202601": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202602": {"taxa": 380.0, "fr": 60.0, "te": 300.0, "acr": 0.0, "n": 2, "atr": 0}, "202604": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202605": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202606": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202607": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202608": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202408": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}}, "401": {"202312": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 1}, "202401": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202402": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202403": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 1}, "202404": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202405": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202406": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202407": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202409": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202410": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.07, "n": 1, "atr": 1}, "202411": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 1}, "202412": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.07, "n": 1, "atr": 1}, "202501": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.21, "n": 1, "atr": 1}, "202502": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202503": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202504": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202505": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202506": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.1, "n": 1, "atr": 1}, "202507": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202508": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202509": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202510": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202511": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202512": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202601": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 7.55, "n": 1, "atr": 1}, "202602": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202603": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202604": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202605": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202606": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202607": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202608": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202408": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}}, "402": {"202312": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 1}, "202401": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202402": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202403": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.28, "n": 1, "atr": 1}, "202404": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202405": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202407": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.35, "n": 1, "atr": 1}, "202409": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 5.61, "n": 1, "atr": 1}, "202410": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.07, "n": 1, "atr": 1}, "202411": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.28, "n": 1, "atr": 1}, "202412": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202501": {"taxa": 510.0, "fr": 90.0, "te": 0.0, "acr": 32.29, "n": 3, "atr": 2}, "202503": {"taxa": 510.0, "fr": 90.0, "te": 300.0, "acr": 16.4, "n": 3, "atr": 2}, "202505": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.4, "n": 1, "atr": 1}, "202506": {"taxa": 340.0, "fr": 60.0, "te": 200.0, "acr": 6.3, "n": 2, "atr": 1}, "202508": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202509": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 6.6, "n": 1, "atr": 1}, "202510": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 7.44, "n": 1, "atr": 1}, "202511": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202512": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202601": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202602": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202603": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202604": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202605": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202606": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202607": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202608": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}}, "501": {"202312": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202401": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202402": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202403": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202404": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202405": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202406": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202407": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202409": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 4.07, "n": 1, "atr": 1}, "202412": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 8.34, "n": 1, "atr": 1}, "202501": {"taxa": 510.0, "fr": 90.0, "te": 0.0, "acr": 18.51, "n": 3, "atr": 3}, "202504": {"taxa": 510.0, "fr": 90.0, "te": 300.0, "acr": 31.5, "n": 3, "atr": 3}, "202505": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 7.6, "n": 1, "atr": 1}, "202508": {"taxa": 340.0, "fr": 60.0, "te": 200.0, "acr": 22.2, "n": 2, "atr": 2}, "202509": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 9.6, "n": 1, "atr": 1}, "202512": {"taxa": 679.9, "fr": 119.99, "te": 549.91, "acr": 44.32, "n": 4, "atr": 4}, "202601": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202602": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 8.6, "n": 1, "atr": 1}, "202604": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 10.64, "n": 1, "atr": 1}, "202605": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 11.12, "n": 1, "atr": 1}, "202606": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 10.52, "n": 1, "atr": 1}, "202607": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 10.88, "n": 1, "atr": 1}, "202608": {"taxa": 380.0, "fr": 60.0, "te": 300.0, "acr": 20.44, "n": 2, "atr": 2}, "202408": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}}, "502": {"202312": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 1}, "202401": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202402": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202403": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202404": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202405": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202406": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202407": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202409": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202410": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202411": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202412": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202501": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}, "202502": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202503": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202504": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202505": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202506": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202507": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202508": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202509": {"taxa": 170.0, "fr": 30.0, "te": 100.0, "acr": 0.0, "n": 1, "atr": 0}, "202510": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202511": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202512": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202601": {"taxa": 170.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202602": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202603": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202604": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202605": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202606": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202607": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202608": {"taxa": 190.0, "fr": 30.0, "te": 150.0, "acr": 0.0, "n": 1, "atr": 0}, "202408": {"taxa": 170.0, "fr": 30.0, "te": 0.0, "acr": 0.0, "n": 1, "atr": 0}}}, "unitMonths": ["202312", "202401", "202402", "202403", "202404", "202405", "202406", "202407", "202408", "202409", "202410", "202411", "202412", "202501", "202502", "202503", "202504", "202505", "202506", "202507", "202508", "202509", "202510", "202511", "202512", "202601", "202602", "202603", "202604", "202605", "202606", "202607", "202608"], "unitList": ["101", "102", "201", "202", "301", "302", "401", "402", "501", "502"], "fatos": [{"t": "Cotas dos fundos registradas na conta corrente", "v": 4899.9, "d": "Entre set e dez/25, R$ 899,99 de cotas do Fundo de Reserva e R$ 3.999,91 da Taxa Extra foram creditados na conta corrente e não foram transferidos para as contas dos fundos."}, {"t": "Transferência entre contas sem lançamento", "v": 5595.0, "d": "Entre o fechamento de out/25 e a abertura de nov/25, R$ 5.595,00 saíram da Taxa Extra e entraram na conta corrente (valor das câmeras), sem lançamento de transferência. O saldo total ficou R$ 1,00 maior sem explicação."}, {"t": "Receita ordinária abaixo das despesas em 2026", "v": -3088.76, "d": "De jan a ago/26, a taxa condominial com multas e juros somou R$ 14.814,75, e as despesas operacionais somaram R$ 17.903,51."}, {"t": "Meses sem prestação de contas", "v": null, "d": "Jul/23 e ago/24 não têm prestação de contas na pasta. Os valores foram simulados a partir do boleto de R$ 200 e dos gastos da época, e fecham com o saldo informado no mês seguinte."}]};
+const BRL = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' });
+const NUMF = new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const PCT = new Intl.NumberFormat('pt-BR', { style: 'percent', minimumFractionDigits: 1, maximumFractionDigits: 1 });
+const brl = v => BRL.format(v || 0);
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const C = D.cats;
+const ORD = ['Taxa condominial', 'Multas', 'Juros', 'Multas e juros (não discriminados)'];
+let APT = null, PERIOD = 'all', charts = {};
+
+function store(k, v) { try { v === undefined ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) {} }
+function load(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+
+/* ---------- entrada ---------- */
+function enter(apt) {
+  APT = apt; store('apto', apt);
+  $('gate').hidden = true; $('app').hidden = false;
+  $('apt-label').textContent = apt; $('apt-label-2').textContent = apt;
+  renderAll();
+}
+$('gate-form').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = $('apt-input').value.trim();
+  if (D.unitList.includes(v)) { $('gate-err').textContent = ''; enter(v); }
+  else $('gate-err').textContent = 'Número não encontrado. Digite um destes: ' + D.unitList.join(', ') + '.';
+});
+$('apt-change').addEventListener('click', () => {
+  store('apto'); $('app').hidden = true; $('gate').hidden = false; $('apt-input').value = ''; $('apt-input').focus();
+});
+
+/* ---------- cálculos ---------- */
+const years = [...new Set(D.months.map(m => m.k.slice(0, 4)))];
+function monthsOf(p) { return p === 'all' ? D.months : D.months.filter(m => m.k.startsWith(p)); }
+function sum(ms, side, cats) { let t = 0; for (const m of ms) for (const c of cats) t += (m[side][c] || 0); return t; }
+function totals(ms) {
+  const rec = sum(ms, 'rec', C.rec), recorr = sum(ms, 'desp', C.recorr), naorec = sum(ms, 'desp', C.naorec), aj = sum(ms, 'desp', C.ajuste);
+  const ord = sum(ms, 'rec', ORD);
+  return { rec, recorr, naorec, aj, op: recorr + naorec, desp: recorr + naorec + aj, ord, res: rec - recorr - naorec - aj, n: ms.length };
+}
+function unitPaid(u, ms) {
+  const r = { taxa: 0, fr: 0, te: 0, acr: 0, n: 0, atr: 0 };
+  for (const m of ms) { const d = (D.units[u] || {})[m.k]; if (!d) continue; for (const k in r) r[k] += d[k]; }
+  r.total = r.taxa + r.fr + r.te + r.acr; return r;
+}
+
+/* ---------- saldos ---------- */
+function renderSaldos() {
+  const last = D.months[D.months.length - 1], prev = D.months[D.months.length - 2];
+  $('saldo-mes').textContent = 'Fechamento de ' + last.l;
+  $('sub-periodo').textContent = 'Prestação de contas · ' + D.meta.inicio + ' a ' + D.meta.fim + ' · atualizado em ' + D.meta.gerado;
+  const delta = (a, b) => {
+    if (a == null || b == null) return '';
+    const d = a - b; const cls = d >= 0 ? 'up' : 'down';
+    return `<span class="${cls}">${d >= 0 ? '▲' : '▼'} ${brl(Math.abs(d))}</span> vs ${prev.l}`;
+  };
+  const tiles = [
+    { t: 'Saldo total', v: last.sf, p: prev.sf, n: 'Soma de todas as contas', hero: true },
+    { t: 'Conta corrente', v: last.cc, p: prev.cc, n: 'Paga as despesas do mês' },
+    { t: 'Fundo de reserva', v: last.fr, p: prev.fr, n: 'Reserva para emergências e manutenção' },
+    { t: 'Taxa extra', v: last.te, p: prev.te, n: 'Aprovada em assembleia (13/01/25)' },
+  ];
+  $('tiles').innerHTML = tiles.map(x => `<div class="tile${x.hero ? ' hero' : ''}"><div class="eyebrow">${x.t}</div>
+    <div class="val num">${x.v == null ? '—' : brl(x.v)}</div><div class="delta">${delta(x.v, x.p)}</div><div class="note">${x.n}</div></div>`).join('');
+  const f = D.fatos[0];
+  $('callout').innerHTML = `<span class="tag">Atenção</span><span>${esc(f.d)} Se esse valor fosse transferido para os fundos, a conta corrente ficaria em <b class="num">${brl(last.cc - f.v)}</b>.</span>`;
+}
+
+/* ---------- filtro ---------- */
+function renderChips() {
+  const opts = [['all', 'Todo o período']].concat(years.map(y => [y, y]));
+  $('chips').innerHTML = opts.map(([v, t]) => `<button type="button" class="chip" data-p="${v}" aria-pressed="${v === PERIOD}">${t}</button>`).join('');
+  $('chips').querySelectorAll('.chip').forEach(b => b.addEventListener('click', () => { PERIOD = b.dataset.p; store('periodo', PERIOD); renderAll(); }));
+  const ms = monthsOf(PERIOD), sims = ms.filter(m => m.sim).map(m => m.l);
+  $('period-info').innerHTML = `${ms[0].l} a ${ms[ms.length - 1].l} · ${ms.length} meses` + (sims.length ? ` · <span class="sim-badge">simulado: ${sims.join(', ')}</span>` : '');
+}
+
+/* ---------- apartamento ---------- */
+function renderApt() {
+  const ms = monthsOf(PERIOD).filter(m => D.unitMonths.includes(m.k));
+  if (!ms.length) {
+    $('apt-paid').innerHTML = `<h3>Sem dados por unidade neste período</h3><p>Os relatórios de mai a nov/23 não identificam qual apartamento pagou cada boleto. Escolha outro período.</p>`;
+    $('apt-spent').innerHTML = ''; return;
+  }
+  const me = unitPaid(APT, ms);
+  let all = 0; D.unitList.forEach(u => all += unitPaid(u, ms).total);
+  const share = all ? me.total / all : 0;
+  const tot = totals(ms);
+  const myOp = tot.op * share, mySaved = me.total - myOp;
+  const cover = `${ms[0].l} a ${ms[ms.length - 1].l} (${ms.length} meses com pagamento identificado por unidade)`;
+  $('apt-paid').innerHTML = `<h3>O que você pagou</h3><p>${cover}</p>
+    <dl class="kv">
+      <dt>Taxa condominial</dt><dd>${brl(me.taxa)}</dd>
+      <dt>Fundo de reserva</dt><dd>${brl(me.fr)}</dd>
+      <dt>Taxa extra</dt><dd>${brl(me.te)}</dd>
+      <dt>Multas e juros por atraso</dt><dd>${brl(me.acr)}</dd>
+      <dt class="total">Total pago</dt><dd class="total">${brl(me.total)}</dd>
+    </dl>
+    <div class="big-share"><span class="val num">${PCT.format(share)}</span><span class="lede">do total arrecadado das 10 unidades (${brl(all)})</span></div>
+    <p class="lede" style="margin-top:6px;font-size:.88rem">${me.n} boletos pagos, ${me.atr} com atraso.${D.unitMonths.some(k => monthsOf(PERIOD).find(m => m.k === k && m.sim)) ? ' Inclui ago/24 simulado.' : ''}</p>`;
+  const cats = C.recorr.concat(C.naorec).map(c => ({ c, v: sum(ms, 'desp', [c]) * share })).filter(x => x.v > 0.005).sort((a, b) => b.v - a.v);
+  const max = cats.length ? cats[0].v : 1;
+  const pOp = me.total ? Math.max(0, myOp / me.total) : 0;
+  $('apt-spent').innerHTML = `<h3>Sua parte nas despesas</h3><p>Aplicando os seus ${PCT.format(share)} sobre cada despesa do mesmo período.</p>
+    <div class="flow">
+      <div class="flow-bar" aria-hidden="true"><span style="width:${(pOp * 100).toFixed(1)}%;background:var(--s2)"></span><span style="flex:1;background:var(--s3)"></span></div>
+      <div class="flow-legend"><span><i style="background:var(--s2)"></i>Gasto nas despesas: <b class="num">${brl(myOp)}</b></span><span><i style="background:var(--s3)"></i>Ficou no saldo (fundos e caixa): <b class="num">${brl(mySaved)}</b></span></div>
+    </div>
+    <div class="table-wrap"><table><thead><tr><th>Despesa</th><th>Sua parte</th><th>Por mês</th></tr></thead><tbody>
+    ${cats.map(x => `<tr><td>${esc(x.c)}</td><td>${brl(x.v)}<span class="pctbar" style="width:${Math.max(2, 60 * x.v / max).toFixed(0)}px"></span></td><td>${brl(x.v / ms.length)}</td></tr>`).join('')}
+    <tr class="tot"><td>Total</td><td>${brl(myOp)}</td><td>${brl(myOp / ms.length)}</td></tr></tbody></table></div>`;
+}
+
+/* ---------- médias ---------- */
+function renderAvg() {
+  const ms = monthsOf(PERIOD), t = totals(ms), n = ms.length;
+  const items = [
+    { t: 'Receita média', v: t.rec / n, n: 'Tudo o que entrou, por mês' },
+    { t: 'Despesa média', v: t.op / n, n: 'Despesas operacionais, por mês' },
+    { t: 'Resultado médio', v: t.res / n, n: 'O que sobrou por mês (vai para o saldo)', sign: true },
+    { t: 'Cobertura da taxa', raw: t.recorr ? (t.ord / t.recorr) : 0, n: 'Receita ordinária ÷ despesas recorrentes. Abaixo de 1,00 a taxa não cobre o fixo.' },
+  ];
+  $('avg-tiles').innerHTML = items.map(x => {
+    const val = x.raw != null ? x.raw.toFixed(2).replace('.', ',') : brl(x.v);
+    const cls = x.raw != null ? (x.raw < 1 ? 'down' : 'up') : (x.sign ? (x.v < 0 ? 'down' : 'up') : '');
+    return `<div class="tile"><div class="eyebrow">${x.t}</div><div class="val num ${cls}">${val}</div><div class="note">${x.n}</div></div>`;
+  }).join('');
+}
+
+/* ---------- DRE ---------- */
+function renderDRE() {
+  const ms = monthsOf(PERIOD), t = totals(ms), n = ms.length;
+  const row = (label, v, base, cls = '') => `<tr class="${cls}"><td>${esc(label)}</td><td class="${v < 0 ? 'neg' : ''}">${brl(v)}</td><td>${base ? PCT.format(v / base) : ''}</td><td class="${v < 0 ? 'neg' : ''}">${brl(v / n)}</td></tr>`;
+  let h = `<thead><tr><th>Linha</th><th>Total do período</th><th>%</th><th>Média por mês</th></tr></thead><tbody>`;
+  h += `<tr class="grp"><td colspan="4">Receitas</td></tr>`;
+  C.rec.forEach(c => { const v = sum(ms, 'rec', [c]); if (Math.abs(v) > 0.004) h += row(c, v, t.rec); });
+  h += row('Receita total', t.rec, t.rec, 'sub');
+  h += `<tr class="grp"><td colspan="4">Despesas recorrentes</td></tr>`;
+  C.recorr.forEach(c => { const v = sum(ms, 'desp', [c]); if (Math.abs(v) > 0.004) h += row(c, v, t.op); });
+  h += row('Subtotal recorrentes', t.recorr, t.op, 'sub');
+  h += `<tr class="grp"><td colspan="4">Despesas não recorrentes</td></tr>`;
+  C.naorec.forEach(c => { const v = sum(ms, 'desp', [c]); if (Math.abs(v) > 0.004) h += row(c, v, t.op); });
+  h += row('Subtotal não recorrentes', t.naorec, t.op, 'sub');
+  h += row('Despesas operacionais', t.op, t.op, 'sub');
+  if (t.aj > 0.004) h += row('Ajustes: débitos devolvidos pelo banco (anulam os estornos da receita)', t.aj, 0);
+  h += row('Resultado do período (receitas − despesas)', t.res, t.rec, 'tot');
+  h += row('Resultado ordinário (taxa + multas + juros − despesas operacionais)', t.ord - t.op, 0, 'tot');
+  $('dre').innerHTML = h + '</tbody>';
+}
+
+/* ---------- gráficos ---------- */
+function tok(n) { return getComputedStyle(document.documentElement).getPropertyValue(n).trim(); }
+function alpha(hex, a) { const h = hex.replace('#', ''); const r = parseInt(h.slice(0, 2), 16), g = parseInt(h.slice(2, 4), 16), b = parseInt(h.slice(4, 6), 16); return `rgba(${r},${g},${b},${a})`; }
+function baseOpts(extra = {}) {
+  const grid = tok('--line'), ink = tok('--ink-2'), muted = tok('--muted');
+  return Object.assign({
+    responsive: true, maintainAspectRatio: false, animation: { duration: 250 },
+    interaction: { mode: 'index', intersect: false },
+    plugins: { legend: { display: false }, tooltip: { backgroundColor: tok('--surface'), titleColor: tok('--ink'), bodyColor: ink, borderColor: tok('--axis'), borderWidth: 1, padding: 10,
+      titleFont: { family: 'Source Sans 3', weight: '700' }, bodyFont: { family: 'Source Sans 3' }, usePointStyle: true,
+      callbacks: { label: c => ` ${c.dataset.label}: ${brl(c.parsed.y ?? c.parsed.x)}` } } },
+    scales: {
+      x: { grid: { display: false }, border: { color: tok('--axis') }, ticks: { color: muted, font: { family: 'Source Sans 3', size: 11 }, maxRotation: 0, autoSkipPadding: 8 } },
+      y: { grid: { color: grid }, border: { display: false }, ticks: { color: muted, font: { family: 'Source Sans 3', size: 11 }, callback: v => 'R$ ' + (Math.abs(v) >= 1000 ? (v / 1000).toLocaleString('pt-BR') + ' mil' : v.toLocaleString('pt-BR')) } } }
+  }, extra);
+}
+function mk(id, cfg) { if (charts[id]) charts[id].destroy(); charts[id] = new Chart($(id), cfg); }
+
+function renderCharts() {
+  if (!window.Chart) return;
+  const ms = monthsOf(PERIOD);
+  const s1 = tok('--s1'), s2 = tok('--s2'), s3 = tok('--s3'), surface = tok('--surface');
+  const simT = items => items.length && ms[items[0].dataIndex] && ms[items[0].dataIndex].sim ? ms[items[0].dataIndex].l + ' · SIMULADO' : (items[0] ? items[0].label : '');
+
+  const recs = ms.map(m => sum([m], 'rec', C.rec)), desps = ms.map(m => sum([m], 'desp', C.recorr.concat(C.naorec, C.ajuste)));
+  mk('c-mensal', { type: 'bar', data: { labels: ms.map(m => m.l), datasets: [
+      { label: 'Receitas', data: recs, backgroundColor: ms.map(m => m.sim ? alpha(s1, .35) : s1), borderRadius: 4, borderSkipped: 'bottom', barPercentage: .85, categoryPercentage: .8 },
+      { label: 'Despesas', data: desps, backgroundColor: ms.map(m => m.sim ? alpha(s2, .35) : s2), borderRadius: 4, borderSkipped: 'bottom', barPercentage: .85, categoryPercentage: .8 }] },
+    options: baseOpts({ plugins: Object.assign(baseOpts().plugins, { tooltip: Object.assign(baseOpts().plugins.tooltip, { callbacks: {
+      title: simT, label: c => ` ${c.dataset.label}: ${brl(c.parsed.y)}`,
+      footer: it => { const r = it[0] ? recs[it[0].dataIndex] - desps[it[0].dataIndex] : 0; return 'Resultado: ' + brl(r); } } }) }) }) });
+
+  const line = (label, key, color) => ({ label, data: ms.map(m => key === 'sf' ? m.sf : m[key]), borderColor: color, backgroundColor: color, borderWidth: 2, pointRadius: ms.map(m => m.sim ? 4 : 0), pointHoverRadius: 5, pointBackgroundColor: ms.map(m => m.sim ? tok('--sim') : color), pointBorderColor: surface, pointBorderWidth: 2, tension: .25, spanGaps: false });
+  mk('c-saldo', { type: 'line', data: { labels: ms.map(m => m.l), datasets: [line('Saldo total', 'sf', s1), line('Fundo de reserva', 'fr', s2), line('Taxa extra', 'te', s3)] },
+    options: baseOpts({ plugins: Object.assign(baseOpts().plugins, { tooltip: Object.assign(baseOpts().plugins.tooltip, { callbacks: { title: simT,
+      label: c => c.parsed.y == null ? null : ` ${c.dataset.label}: ${brl(c.parsed.y)}` } }) }) }) });
+
+  const t = totals(ms);
+  const comp = C.recorr.concat(C.naorec).map(c => ({ c, v: sum(ms, 'desp', [c]) })).filter(x => x.v > 0.005).sort((a, b) => b.v - a.v);
+  const top = comp.slice(0, 10), rest = comp.slice(10).reduce((a, x) => a + x.v, 0);
+  if (rest > 0) top.push({ c: 'Outras despesas', v: rest });
+  mk('c-comp', { type: 'bar', data: { labels: top.map(x => x.c.replace(' (síndico profissional)', '')), datasets: [{ label: 'Despesa', data: top.map(x => x.v), backgroundColor: s1, borderRadius: 4, borderSkipped: 'start', barPercentage: .75 }] },
+    options: baseOpts({ indexAxis: 'y', interaction: { mode: 'nearest', axis: 'y', intersect: false },
+      plugins: Object.assign(baseOpts().plugins, { tooltip: Object.assign(baseOpts().plugins.tooltip, { callbacks: { label: c => ` ${brl(c.parsed.x)} · ${PCT.format(c.parsed.x / t.op)} do total` } }) }),
+      scales: { x: Object.assign(baseOpts().scales.y, { grid: { color: tok('--line') } }), y: { grid: { display: false }, border: { color: tok('--axis') }, ticks: { color: tok('--ink-2'), font: { family: 'Source Sans 3', size: 11 } } } } }) });
+
+  const yr = years.map(y => { const m = monthsOf(y); const tt = totals(m); return { y, ord: tt.ord / m.length, rc: tt.recorr / m.length, cob: tt.recorr ? tt.ord / tt.recorr : 0, n: m.length }; });
+  mk('c-cob', { type: 'bar', data: { labels: yr.map(x => x.y + (x.n < 12 ? ` (${x.n} m)` : '')), datasets: [
+      { label: 'Receita ordinária / mês', data: yr.map(x => x.ord), backgroundColor: s1, borderRadius: 4, borderSkipped: 'bottom' },
+      { label: 'Despesas recorrentes / mês', data: yr.map(x => x.rc), backgroundColor: s2, borderRadius: 4, borderSkipped: 'bottom' }] },
+    options: baseOpts({ plugins: Object.assign(baseOpts().plugins, { tooltip: Object.assign(baseOpts().plugins.tooltip, { callbacks: {
+      label: c => ` ${c.dataset.label}: ${brl(c.parsed.y)}`, footer: it => it[0] ? 'Cobertura: ' + yr[it[0].dataIndex].cob.toFixed(2).replace('.', ',') : '' } }) }) }) });
+  $('cob-text').innerHTML = 'Índice de cobertura por ano: ' + yr.map(x => `<b class="num ${x.cob < 1 ? 'down' : ''}">${x.y}: ${x.cob.toFixed(2).replace('.', ',')}</b>`).join(' · ');
+
+  const ums = ms.filter(m => D.unitMonths.includes(m.k));
+  const up = D.unitList.map(u => ({ u, ...unitPaid(u, ums) }));
+  const all = up.reduce((a, x) => a + x.total, 0);
+  mk('c-aptos', { type: 'bar', data: { labels: up.map(x => 'Apto ' + x.u), datasets: [{ label: 'Total pago', data: up.map(x => x.total),
+      backgroundColor: up.map(x => x.u === APT ? s1 : alpha(tok('--muted'), .45)), borderRadius: 4, borderSkipped: 'bottom', barPercentage: .7 }] },
+    options: baseOpts({ plugins: Object.assign(baseOpts().plugins, { tooltip: Object.assign(baseOpts().plugins.tooltip, { callbacks: {
+      label: c => ` Total pago: ${brl(c.parsed.y)} · ${PCT.format(c.parsed.y / all)}` } }) }) }) });
+  $('t-aptos').innerHTML = `<thead><tr><th>Apartamento</th><th>Taxa</th><th>Fundo de reserva</th><th>Taxa extra</th><th>Multas e juros</th><th>Total</th><th>Participação</th></tr></thead><tbody>` +
+    up.map(x => `<tr class="${x.u === APT ? 'me' : ''}"><td>${x.u}${x.u === APT ? ' (você)' : ''}</td><td>${brl(x.taxa)}</td><td>${brl(x.fr)}</td><td>${brl(x.te)}</td><td>${brl(x.acr)}</td><td>${brl(x.total)}</td><td>${all ? PCT.format(x.total / all) : ''}</td></tr>`).join('') +
+    `<tr class="tot"><td>Total</td><td>${brl(up.reduce((a, x) => a + x.taxa, 0))}</td><td>${brl(up.reduce((a, x) => a + x.fr, 0))}</td><td>${brl(up.reduce((a, x) => a + x.te, 0))}</td><td>${brl(up.reduce((a, x) => a + x.acr, 0))}</td><td>${brl(all)}</td><td>100,0%</td></tr></tbody>`;
+}
+
+/* ---------- fatos ---------- */
+function renderFacts() {
+  $('facts').innerHTML = D.fatos.map(f => `<div class="fact"><div class="eyebrow">${esc(f.t)}</div>${f.v != null ? `<div class="v num ${f.v < 0 ? 'down' : ''}">${brl(f.v)}</div>` : ''}<p>${esc(f.d)}</p></div>`).join('');
+  $('foot-1').textContent = `Dados de ${D.meta.inicio} a ${D.meta.fim}. Atualizado em ${D.meta.gerado}.`;
+  $('foot-sim').textContent = `Meses simulados (sem prestação de contas): ${D.meta.simulados.join(' e ')}. Pagamentos por apartamento identificados a partir de dez/23.`;
+}
+
+function renderAll() { renderSaldos(); renderChips(); renderApt(); renderAvg(); renderDRE(); renderCharts(); renderFacts(); }
+
+/* tema: redesenha os gráficos quando o tema muda */
+try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => APT && renderCharts()); } catch (e) {}
+new MutationObserver(() => APT && renderCharts()).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+const savedP = load('periodo'); if (savedP && (savedP === 'all' || years.includes(savedP))) PERIOD = savedP;
+const saved = load('apto'); if (saved && D.unitList.includes(saved)) enter(saved);
+</script>
+
+</body>
+</html>
