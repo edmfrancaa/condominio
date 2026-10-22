@@ -115,6 +115,7 @@ td.bar-cell { width: 34%; min-width: 120px; }
 .hbar.rec { background: var(--s1); }
 .cmp { font-size: .78rem; font-weight: 600; margin-left: 6px; }
 th.mine, td.mine { background: var(--accent-soft); }
+tr.more-row { display: none; }
 .legend-note { margin-top: 10px; font-size: .82rem; color: var(--muted); }
 
 /* apartamento */
@@ -157,14 +158,55 @@ footer { margin-top: 44px; padding-top: 16px; border-top: 1px solid var(--line);
   .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .tiles.three, .apt { grid-template-columns: minmax(0, 1fr); }
 }
-@media (max-width: 520px) {
+@media (max-width: 640px) {
   .wrap { padding-inline: 16px; }
-  .tiles { grid-template-columns: minmax(0, 1fr); }
-  .tile .val { font-size: 1.55rem; }
-  .chart-box { height: 250px; }
-  td.bar-cell { display: none; }
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .tiles.three { grid-template-columns: minmax(0, 1fr); }
+  .tile { padding: 12px 14px; }
+  .tile .val { font-size: 1.3rem; }
+  .tile.hero { grid-column: 1 / -1; }
+  .tile.hero .val { font-size: 1.7rem; }
+  .brand h1 { font-size: 1.25rem; }
+  h2 { font-size: 1.2rem; }
+  .panel { padding: 12px 14px; }
+  .chart-card { padding: 14px; }
+  .chart-box { height: 240px; }
   .point { grid-template-columns: minmax(0, 1fr); }
   .point .v { grid-row: auto; }
+  .filter { gap: 6px 8px; }
+  .chip { padding: 4px 11px; font-size: .84rem; }
+
+  /* tabelas viram cartões: nada de rolagem lateral */
+  .table-wrap { overflow-x: visible; }
+  #t-main thead, #t-aptos thead { display: none; }
+  #t-main, #t-main tbody, #t-aptos, #t-aptos tbody { display: block; }
+  #t-main tr, #t-aptos tr { display: grid; column-gap: 10px; row-gap: 2px; padding: 9px 0; border-bottom: 1px solid var(--line); }
+  #t-main td, #t-aptos td { display: block; border: 0; padding: 0; white-space: normal; text-align: left; background: none; }
+  #t-main tr { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "l l v" "b b b" "p m s"; }
+  #t-main td.l { grid-area: l; font-weight: 600; }
+  #t-main td.v { grid-area: v; text-align: right; font-weight: 700; }
+  #t-main td.b { grid-area: b; display: block; width: auto; min-width: 0; padding-block: 3px; }
+  #t-main td.p { grid-area: p; } #t-main td.m { grid-area: m; } #t-main td.s { grid-area: s; text-align: right; }
+  #t-main td.m { text-align: center; }
+  #t-main tr.grp { display: block; padding: 0; border: 0; margin-top: 10px; }
+  #t-main tr.grp td { padding: 6px 8px; border-radius: 6px; }
+  #t-main tr.tot { border-top: 2px solid var(--axis); border-bottom: 0; }
+  #t-main tr.tot td.b { display: none; }
+  #t-aptos tr { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "a a v v" "t f e j" "p p p p"; }
+  #t-aptos td.a { grid-area: a; font-weight: 700; } #t-aptos td.v { grid-area: v; text-align: right; font-weight: 700; }
+  #t-aptos td.t { grid-area: t; } #t-aptos td.f { grid-area: f; } #t-aptos td.e { grid-area: e; } #t-aptos td.j { grid-area: j; } #t-aptos td.p { grid-area: p; }
+  #t-aptos tr.me { background: var(--accent-soft); border-radius: 8px; padding-inline: 8px; }
+  #t-aptos tr.me td { background: none; }
+  #t-main td[data-h], #t-aptos td[data-h] { font-size: .78rem; color: var(--ink-2); }
+  #t-main td[data-h]::before, #t-aptos td[data-h]::before { content: attr(data-h); display: block; font-size: .64rem; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 700; }
+  #t-main td.s { color: var(--accent-ink); font-weight: 700; }
+  #t-main:not(.expanded) tr.extra { display: none; }
+  #t-main tr.more-row { display: block; padding: 6px 0; }
+  #t-main.expanded tr.more-row { display: none; }
+  .cmp { margin-left: 4px; }
+}
+@media (max-width: 360px) {
+  .tiles { grid-template-columns: minmax(0, 1fr); }
 }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
@@ -389,9 +431,12 @@ function renderMain() {
     const d = v / r - 1; if (Math.abs(d) < .15) return '';
     return `<span class="cmp ${d > 0 ? 'down' : 'up'}" title="${PCT.format(d)} em relação à média">${d > 0 ? '▲' : '▼'}</span>`;
   };
+  const hM = `data-h="${refLabel}"`, hS = `data-h="Sua parte"`;
   const row = (label, v, base, refv, max, kind, mine) =>
-    `<tr><td>${esc(label)}</td><td class="bar-cell"><div class="hbar ${kind}" style="width:${(100 * Math.max(0, v) / max).toFixed(1)}%"></div></td>
-      <td>${brl(v)}${cmp(v, refv)}</td><td>${base ? PCT.format(v / base) : ''}</td><td>${brl(refv)}</td>${showMine ? `<td class="mine">${mine == null ? '' : brl(mine)}</td>` : ''}</tr>`;
+    `<tr><td class="l">${esc(label)}</td><td class="bar-cell b"><div class="hbar ${kind}" style="width:${(100 * Math.max(0, v) / max).toFixed(1)}%"></div></td>
+      <td class="v">${brl(v)}${cmp(v, refv)}</td><td class="p" data-h="Do total">${base ? PCT.format(v / base) : '—'}</td><td class="m" ${hM}>${brl(refv)}</td>${showMine ? `<td class="mine s" ${hS}>${mine == null ? '—' : brl(mine)}</td>` : ''}</tr>`;
+  const totRow = (label, v, pctTxt, refv, mine, neg) =>
+    `<tr class="tot"><td class="l">${label}</td><td class="bar-cell b"></td><td class="v ${neg ? 'down' : ''}">${brl(v)}</td><td class="p" data-h="Do total">${pctTxt || '—'}</td><td class="m" ${hM}>${brl(refv)}</td>${showMine ? `<td class="mine s" ${hS}>${brl(mine)}</td>` : ''}</tr>`;
   let h = `<thead><tr><th></th><th class="bar-cell"></th><th>${isMonth() ? 'No mês' : 'Total'}</th><th>%</th><th>${refLabel}</th>${showMine ? `<th class="mine">Sua parte (apto ${APT})</th>` : ''}</tr></thead><tbody>`;
   const rt = ref ? totals(ref) : t;
   const r = (v) => v / rn;
@@ -400,20 +445,26 @@ function renderMain() {
   [['Taxa condominial', t.taxa, rt.taxa, myIn && myIn.taxa], ['Fundo de reserva', t.fr, rt.fr, myIn && myIn.fr], ['Taxa extra', t.te, rt.te, myIn && myIn.te],
    ['Multas e juros por atraso', t.mj, rt.mj, myIn && myIn.acr]].forEach(([l, v, rv, mine]) => { if (Math.abs(v) > 0.004 || Math.abs(rv) > 0.004) h += row(l, v, t.entrou, r(rv), maxR, 'rec', mine); });
   if (Math.abs(t.outros) > 0.004) h += row('Devoluções de fornecedores', t.outros, t.entrou, r(rt.outros), maxR, 'rec', null);
-  h += `<tr class="tot"><td>Total que entrou</td><td class="bar-cell"></td><td>${brl(t.entrou)}</td><td></td><td>${brl(r(rt.entrou))}</td>${showMine ? `<td class="mine">${brl(sh.me.total)}</td>` : ''}</tr>`;
+  h += totRow('Total que entrou', t.entrou, '', r(rt.entrou), sh && sh.me.total);
   const grp = (title, cats) => {
     const rows = cats.map(c => ({ c, v: sum(ms, 'desp', [c]), rv: ref ? sum(ref, 'desp', [c]) : sum(ms, 'desp', [c]) })).filter(x => x.v > 0.004).sort((a, b) => b.v - a.v);
     if (!rows.length) return '';
     let s = `<tr class="grp"><td colspan="${showMine ? 6 : 5}">${title}</td></tr>`;
-    rows.forEach(x => { s += row(NICE(x.c), x.v, t.saiu, x.rv / rn, maxD, '', sh ? sum(sh.ums, 'desp', [x.c]) * sh.share : null); });
+    rows.forEach((x, i) => { s += row(NICE(x.c), x.v, t.saiu, x.rv / rn, maxD, '', sh ? sum(sh.ums, 'desp', [x.c]) * sh.share : null).replace('<tr>', i >= 5 ? '<tr class="extra">' : '<tr>'); });
+    if (rows.length > 5) {
+      const rest = rows.slice(5).reduce((a, x) => a + x.v, 0);
+      s += `<tr class="more-row"><td colspan="${showMine ? 6 : 5}"><button type="button" class="btn-ghost" data-more>Mostrar mais ${rows.length - 5} despesas (${brl(rest)})</button></td></tr>`;
+    }
     return s;
   };
   h += grp('Para onde foi: despesas fixas (todo mês)', C.recorr);
   h += grp('Para onde foi: manutenção e gastos eventuais', C.naorec);
   const mySaiu = sh ? sum(sh.ums, 'desp', C.recorr.concat(C.naorec)) * sh.share : null;
-  h += `<tr class="tot"><td>Total que saiu</td><td class="bar-cell"></td><td>${brl(t.saiu)}</td><td>${PCT.format(t.entrou ? t.saiu / t.entrou : 0)} do que entrou</td><td>${brl(r(rt.saiu))}</td>${showMine ? `<td class="mine">${brl(mySaiu)}</td>` : ''}</tr>`;
-  h += `<tr class="tot"><td>Sobrou (foi para o saldo)</td><td class="bar-cell"></td><td class="${t.res < 0 ? 'down' : ''}">${brl(t.res)}</td><td></td><td>${brl(r(rt.res))}</td>${showMine ? `<td class="mine">${brl(sh.me.total - mySaiu)}</td>` : ''}</tr>`;
+  h += totRow('Total que saiu', t.saiu, PCT.format(t.entrou ? t.saiu / t.entrou : 0) + ' do que entrou', r(rt.saiu), mySaiu);
+  h += totRow('Sobrou (foi para o saldo)', t.res, '', r(rt.res), sh && sh.me.total - mySaiu, t.res < 0);
   $('t-main').innerHTML = h + '</tbody>';
+  $('t-main').classList.remove('expanded');
+  $('t-main').querySelectorAll('[data-more]').forEach(b => b.addEventListener('click', () => $('t-main').classList.add('expanded')));
   const notes = [];
   if (sh && !sh.full) notes.push(`"Sua parte" considera ${sh.ums.length} de ${ms.length} meses: antes de dez/23 os relatórios não identificam qual apartamento pagou.`);
   if (!sh) notes.push('Neste período os relatórios não identificam o pagamento por apartamento (mai a nov/23).');
@@ -434,9 +485,11 @@ function renderApt() {
       <div class="bar" aria-hidden="true"><span style="width:${(100 * Math.max(0, Math.min(1, gasto / (sh.me.total || 1)))).toFixed(1)}%;background:var(--s2)"></span><span style="flex:1;background:var(--s3)"></span></div>
       <div class="mini-legend"><span><i style="background:var(--s2)"></i>Despesas: <b class="num">${brl(gasto)}</b></span><span><i style="background:var(--s3)"></i>${guardado >= 0 ? 'Ficou no saldo' : 'Saiu do saldo'}: <b class="num">${brl(Math.abs(guardado))}</b></span></div></div>`;
   const up = D.unitList.map(u => ({ u, ...unitPaid(u, sh.ums) }));
+  const aRow = (label, x, total, part, cls) => `<tr class="${cls}"><td class="a">${label}</td><td class="t" data-h="Taxa">${brl(x.taxa)}</td><td class="f" data-h="Fundo res.">${brl(x.fr)}</td>
+    <td class="e" data-h="Taxa extra">${brl(x.te)}</td><td class="j" data-h="Multas/juros">${brl(x.acr)}</td><td class="v">${brl(total)}</td><td class="p" data-h="Participação">${part}</td></tr>`;
   $('t-aptos').innerHTML = `<thead><tr><th>Apartamento</th><th>Taxa</th><th>Fundo de reserva</th><th>Taxa extra</th><th>Multas e juros</th><th>Total</th><th>Participação</th></tr></thead><tbody>` +
-    up.map(x => `<tr class="${x.u === APT ? 'me' : ''}"><td>${x.u}${x.u === APT ? ' (você)' : ''}</td><td>${brl(x.taxa)}</td><td>${brl(x.fr)}</td><td>${brl(x.te)}</td><td>${brl(x.acr)}</td><td>${brl(x.total)}</td><td>${sh.all ? PCT.format(x.total / sh.all) : ''}</td></tr>`).join('') +
-    `<tr class="tot"><td>Total</td><td>${brl(up.reduce((a, x) => a + x.taxa, 0))}</td><td>${brl(up.reduce((a, x) => a + x.fr, 0))}</td><td>${brl(up.reduce((a, x) => a + x.te, 0))}</td><td>${brl(up.reduce((a, x) => a + x.acr, 0))}</td><td>${brl(sh.all)}</td><td>100,0%</td></tr></tbody>`;
+    up.map(x => aRow(x.u + (x.u === APT ? ' (você)' : ''), x, x.total, sh.all ? PCT.format(x.total / sh.all) : '', x.u === APT ? 'me' : '')).join('') +
+    aRow('Total', { taxa: up.reduce((a, x) => a + x.taxa, 0), fr: up.reduce((a, x) => a + x.fr, 0), te: up.reduce((a, x) => a + x.te, 0), acr: up.reduce((a, x) => a + x.acr, 0) }, sh.all, '100,0%', 'tot') + '</tbody>';
 }
 
 /* gráficos */
